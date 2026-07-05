@@ -22,11 +22,11 @@ resource "aws_subnet" "public" {
 
   tags = merge(
         local.common_tags,
-        # roboshop-dev-private-us-east-1a
+        # roboshop-dev-public-us-east-1a
         {
-            Name = "${var.project}-${var.environment}-private-${local.az_names[count.index]}"
+            Name = "${var.project}-${var.environment}-public-${local.az_names[count.index]}"
         },
-        var.private_subnet_tags
+        var.public_subnet_tags
     )
 
 }
