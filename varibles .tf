@@ -6,7 +6,7 @@ variable "environment"  {
     type = string
     validation {
         condition = contains(["prod","dev","uat"], var.environment)
-        errorMessege = "vpx should selct one environment"
+        error_message = "Environments should be one of dev, qa, uat or prod"
     }
 }
 
