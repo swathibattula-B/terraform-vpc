@@ -1,13 +1,11 @@
 locals {
 
     common_tags = {
-        type = map
-        default = {
             project = "roboshop"
             environment = "environment"
             terraform = "true"
         } 
-    }
+    
 
     vpc_final_tags = merge(
         local.common_tags,
