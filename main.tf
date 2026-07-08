@@ -127,7 +127,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public.id
+  subnet_id     = aws_subnet.public[0].id
 
   tags = merge (
         local.common_tags ,
@@ -156,19 +156,19 @@ resource "aws_route" "database" {
 
 
 resource "aws_route_table_association" "public" {
-  count = length(var.public_subnet_cidrs)
+  count = length(var.public_subnet)
   subnet_id      = var.public_subnet[count.index].id
   route_table_id = aws_route_table.public.id
 }
 
 resource "aws_route_table_association" "private" {
-  count = length(var.private_subnet_cidrs)
+  count = length(var.private_subnet)
   subnet_id      = var.private_subnet[count.index].id
   route_table_id = aws_route_table.private.id
 }
 
 resource "aws_route_table_association" "database" {
-  count = length(var.database_subnet_cidrs)
+  count = length(var.database_subnet)
   subnet_id      = var.database_subnet[count.index].id
   route_table_id = aws_route_table.database.id
 }
